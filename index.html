@@ -3,260 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BẮC NINH - Xứ Kinh Bắc Văn Hiến</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;500;700;900&family=Lora:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<title>BẮC NINH</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;700;900&family=Lora:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{--red:#8c1515;--dark:#0f0404;--gold:#f7d88a;--gold2:#d4a24e}
+:root{--gold:#f7d88a;--dark:#0f0404}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--dark);color:#fff;font-family:'Be Vietnam Pro',sans-serif;overflow-x:hidden;scroll-behavior:smooth}
-h1,h2{font-family:'Lora',serif}
-/* CURTAIN */
-.curtain{position:absolute;top:0;left:0;width:100%;height:100%;z-index:20;display:flex;pointer-events:none;overflow:hidden}
-.curtain span{flex:1;height:100%;background:repeating-linear-gradient(90deg,#b51a1a 0 35px,#9e1616 35px 70px);border-right:1px solid rgba(255,255,255,.08);box-shadow:inset 0 0 30px rgba(0,0,0,.6);transition:transform 1.1s cubic-bezier(.85,0,.15,1)}
-.curtain.left{justify-content:flex-start}
-.curtain.open span:nth-child(1){transform:translateX(-102%)}
-.curtain.open span:nth-child(2){transform:translateX(102%)}
-.curtain.open{pointer-events:none}
-/* SECTION */
-section{position:relative;min-height:100vh;width:100%;padding:6vw 5vw;display:flex;align-items:center;overflow:hidden}
-.glass{background:rgba(255,255,255,.07);backdrop-filter:blur(10px);border:1px solid rgba(247,216,138,.18);border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.4}
-.label{letter-spacing:4px;font-size:11px;color:var(--gold);opacity:.9;margin-bottom:8px}
-.gold{color:var(--gold)}
-.title-big{font-size:4.2vw;line-height:.95;color:var(--gold);text-transform:uppercase;text-shadow:0 4px 30px rgba(247,216,138,.3)}
-/* 1 HERO */
-#hero{background:radial-gradient(60% 80% at 70% 40%,#3a1810 0%,#0f0404 70%)}
-.hero-tower{position:absolute;right:2%;bottom:0;width:38vw;max-width:520px;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,.6))}
-.hero-cloud{position:absolute;top:5%;right:28%;width:32vw;opacity:.9;animation:float 5s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-.stat{display:flex;gap:10px;margin-top:18px}
-.stat .box{padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
-.stat b{font-size:22px;color:var(--gold)}
-/* 2 LỊCH SỬ */
-#lichsu{background:linear-gradient(180deg,#1a0a0a,#0f0404)}
-.timeline-wrap{width:100%;z-index:3}
-.timeline-line{height:2px;background:linear-gradient(90deg,var(--gold),transparent);position:relative;margin:24px 0}
-.timeline-line::before{content:'';position:absolute;top:-4px;left:0;width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold)}
-.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.tcard{background:rgba(255,247,214,.06);border:1px solid rgba(247,216,138,.22);border-radius:16px;padding:16px}
-.tcard h3{color:var(--gold);font-size:18px;margin-bottom:6px}
-.tcard p{font-size:12.5px;opacity:.8;line-height:1.5}
-/* 3 BON MUA */
-#bonmua{padding:0}
-.bonmua-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:1s;filter:brightness(.75)}
-.bonmua-content{position:relative;z-index:3;display:flex;justify-content:space-between;width:100%;padding:6vw 5vw}
-.mua-btns{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.mua-btns button{padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.4);color:#fff;font-size:12px;cursor:pointer}
-.mua-btns button.active{background:var(--gold);color:#000;font-weight:700}
-/* 4 DANH LAM */
-.danhlam{background:#fdf3d0;color:#000;display:flex;justify-content:center;text-align:center}
-.danhlam h1{font-size:7vw;color:#8c1515}
-.danhlam .sub{font-style:italic;color:#5a2a00}
-/* 5 AM THUC */
-#amthuc{background:radial-gradient(circle at center,#2b120e,#0f0404)}
-.food-track{display:flex;align-items:center;gap:4vw;width:100%;z-index:3}
-.food-img{width:32vw;height:32vw;max-width:380px;max-height:380px;border-radius:50%;background:#fff;padding:8px;object-fit:cover;box-shadow:0 0 0 12px rgba(247,216,138,.12),0 30px 60px rgba(0,0,0,.5)}
-.dots{display:flex;gap:8px;margin-top:16px}
-.dots span{width:34px;height:10px;border-radius:10px;background:rgba(255,255,255,.2);cursor:pointer}
-.dots span.active{background:var(--gold)}
-/* 6 LE HOI */
-#lehoi{background:#000}
-.lehoi-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.7)}
-.lehoi-card{position:relative;z-index:3;margin:0 auto;text-align:center}
-.lehoi-title{border:2px solid var(--gold);background:linear-gradient(90deg,#8c1515,#b51a1a);padding:14px 36px;border-radius:40px;display:inline-block;font-size:1.6vw;font-weight:800}
-/* 7 KET LUAN */
-#ketluan{background:#fff7d0;color:#2a1400}
-.pattern{position:absolute;inset:0;opacity:.06;background:radial-gradient(circle,#000 1px,transparent 1px);background-size:22px 22px}
-@media(max-width:900px){.title-big{font-size:9vw}.timeline{grid-template-columns:1fr 1fr}.hero-tower{width:80vw;opacity:.5}.bonmua-content{flex-direction:column}.food-track{flex-direction:column}}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:#fff;font-family:'Be Vietnam Pro',sans-serif;overflow:hidden}
+section{position:relative;min-height:100vh;width:100%;padding:6vw 5vw;display:flex;align-items:center}
+.title-big{font-family:'Lora',serif;font-size:5vw;color:var(--gold);line-height:.9;text-transform:uppercase;overflow:hidden}
+.title-big span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.77,0,.175,1)}
+.title-big.show span{transform:translateY(0)}
+.label{letter-spacing:6px;font-size:11px;color:var(--gold);opacity:0;transform:translateY(20px);transition:.8s .2s}
+.label.show{opacity:1;transform:translateY(0)}
+.glass{background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(247,216,138,.2);border-radius:14px;padding:12px 16px;font-size:13px;margin-top:12px;opacity:0;transform:translateX(60px);transition:all .8s cubic-bezier(.77,0,.175,1)}
+.glass.show{opacity:1;transform:translateX(0)}
+.curtain{position:absolute;inset:0;display:flex;z-index:20;pointer-events:none}
+.curtain span{flex:1;background:repeating-linear-gradient(90deg,#b51a1a 0 35px,#9e1616 35px 70px);transition:transform 1.2s cubic-bezier(.85,0,.15,1)}
+.curtain.open span:first-child{transform:translateX(-102%)}
+.curtain.open span:last-child{transform:translateX(102%)}
+.nav-float{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:12px;align-items:center;background:rgba(0,0,0,.6);border:1px solid rgba(247,216,138,.3);backdrop-filter:blur(12px);padding:8px 14px;border-radius:40px}
+.nav-float button{padding:10px 20px;border-radius:20px;border:none;cursor:pointer;font-weight:900;font-size:13px}
+.btn-next{background:var(--gold);color:#000}
+.btn-prev{background:rgba(255,255,255,.15);color:#fff}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:101;transition:width .4s}
+.cloud{position:absolute;top:8%;right:30%;font-size:40px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
+<div class="nav-float">
+  <button class="btn-prev" onclick="prevSection()">← Quay lại</button>
+  <span id="pageNum" style="font-size:12px;color:var(--gold);min-width:50px;text-align:center">1 / 6</span>
+  <button class="btn-next" onclick="nextSection()">Tiếp theo →</button>
+</div>
 
-<!-- 1 TỔNG QUAN -->
-<section id="hero">
-  <div class="curtain" id="c1"><span></span><span></span></div>
-  <div style="z-index:4;max-width:520px">
-    <div class="label">TỔNG QUAN VỀ</div>
-    <div class="title-big">BẮC NINH</div>
-    <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px">
-      <div class="glass">📜 Tên Hán - Nôm: Bắc Ninh - Xứ Kinh Bắc địa linh</div>
-      <div class="glass">👑 Thủ phủ Luy Lâu năm 187, nơi Phật giáo đầu tiên du nhập vào Việt Nam, trung tâm của vương triều Lý</div>
-      <div class="glass">🎭 Trung tâm văn hóa Quan Họ, làng nghề, lễ hội và công nghiệp hiện đại của miền Bắc</div>
-    </div>
-    <div class="stat">
-      <div class="box"><b>822</b><br><span style="font-size:11px">KM² DIỆN TÍCH</span></div>
-      <div class="box"><b>1.4M+</b><br><span style="font-size:11px">DÂN SỐ - TÍNH ĐẾN 2024</span></div>
-    </div>
-  </div>
-  <img class="hero-tower" src="https://images.unsplash.com/photo-1574236170873-865cbbf6e8c7?q=80&w=800" alt="Chùa Dâu Bắc Ninh">
-  <div class="hero-cloud">☁️</div>
-</section>
-
-<!-- 2 LỊCH SỬ -->
-<section id="lichsu">
-  <div class="curtain" id="c2"><span></span><span></span></div>
-  <div class="timeline-wrap">
-    <div class="label">BẮC NINH</div>
-    <div class="title-big" style="font-size:3vw">Lịch sử phát triển</div>
-    <div class="timeline-line"></div>
-    <div class="timeline">
-      <div class="tcard"><div class="label">GIAI ĐOẠN CỔ ĐẠI</div><h3>CỔ ĐẠI LUY LÂU</h3><p>Luy Lâu - trung tâm Phật giáo, giao thương hơn 2000 năm trước, là một trong những đô thị cổ nhất Việt Nam, đặt nền móng cho văn hóa Kinh Bắc.</p></div>
-      <div class="tcard"><div class="label">ĐỜI LÝ - 1010</div><h3>ĐỀN ĐÔ - KINH ĐÔ</h3><p>Thời nhà Lý, Bắc Ninh là đất phát tích. 8 vị vua nhà Lý được thờ tại Đền Đô, nơi khởi nguồn cho Thăng Long - Hà Nội.</p></div>
-      <div class="tcard"><div class="label">THỜI LÊ - NGUYỄN</div><h3>LÀNG NGHỀ - QUAN HỌ</h3><p>Trăm nghề như gốm Phù Lãng, tranh Đông Hồ, đúc đồng Đại Bái phát triển, Quan Họ trở thành di sản văn hóa phi vật thể đại diện nhân loại.</p></div>
-      <div class="tcard"><div class="label">NGÀY NAY</div><h3>NGÀY NAY</h3><p>Bắc Ninh là tỉnh công nghiệp trọng điểm với KCN Samsung, đô thị hóa nhanh, nhưng vẫn giữ trọn hồn Kinh Bắc trong từng lễ hội, làn điệu.</p></div>
+<section id="s0" style="background:radial-gradient(60% 80% at 70% 40%,#3a1810,#0f0404)">
+  <div class="curtain" id="c0"><span></span><span></span></div>
+  <div style="max-width:560px;z-index:4">
+    <div class="label" id="l1">TỔNG QUAN VỀ</div>
+    <div class="title-big" id="t1"><span>BẮC NINH</span></div>
+    <div class="glass" id="g1">📜 Tên Hán - Nôm: Bắc Ninh - Xứ Kinh Bắc địa linh nhân kiệt</div>
+    <div class="glass" id="g2">👑 Thủ phủ Luy Lâu năm 187, nơi Phật giáo đầu tiên du nhập vào Việt Nam</div>
+    <div class="glass" id="g3">🎭 Trung tâm Quan Họ, làng nghề Đông Hồ, Phù Lãng, Đền Đô - cội nguồn nhà Lý</div>
+    <div style="display:flex;gap:10px;margin-top:20px;opacity:0" id="stat">
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.06)"><b style="color:var(--gold);font-size:22px">822</b><br><span style="font-size:10px">KM² DIỆN TÍCH</span></div>
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.06)"><b style="color:var(--gold);font-size:22px">1.4M+</b><br><span style="font-size:10px">DÂN SỐ</span></div>
     </div>
   </div>
+  <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=800" style="position:absolute;right:2%;bottom:0;width:38vw;border-radius:20px;opacity:.9">
+  <div class="cloud">☁️</div>
 </section>
 
-<!-- 3 BỐN MÙA -->
-<section id="bonmua">
-  <div class="bonmua-bg" id="bonmuaBg" style="background-image:url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1600')"></div>
-  <div class="bonmua-content">
-    <div style="max-width:420px">
-      <div class="label">ĐỊA LÝ & KHÍ HẬU</div>
-      <div class="title-big">Bắc Ninh bốn mùa</div>
-      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
-        <div class="glass">📍 Nằm ở cửa ngõ phía Bắc Hà Nội, thuộc vùng Đồng bằng sông Hồng</div>
-        <div class="glass">🗺️ Gồm 2 thành phố, 2 thị xã và 4 huyện, là đầu mối giao thông huyết mạch</div>
-        <div class="glass">🌤️ Khí hậu: Nhiệt đới gió mùa, 4 mùa rõ rệt, đậm chất Bắc Bộ</div>
-      </div>
-      <div class="mua-btns">
-        <button class="active" onclick="doiMua(0)">Mùa xuân</button>
-        <button onclick="doiMua(1)">Mùa hạ</button>
-        <button onclick="doiMua(2)">Mùa thu</button>
-        <button onclick="doiMua(3)">Mùa đông</button>
-      </div>
-    </div>
-    <div style="text-align:right">
-      <div id="tenMua" class="title-big" style="font-size:5vw">MÙA XUÂN</div>
-      <div id="moTaMua" style="color:var(--gold)">Hội Lim rộn rã - Liền anh liền chị trẩy hội</div>
-    </div>
-  </div>
-</section>
-
-<!-- 4 DANH LAM -->
-<section class="danhlam" id="dl1">
-  <div class="curtain"><span></span><span></span></div>
-  <div style="z-index:3">
-    <div class="label" style="color:#8c1515">DANH LAM THẮNG CẢNH</div>
-    <h1 id="dlTitle1">ĐỀN ĐÔ</h1>
-    <p class="sub">Đền thờ 8 vị vua nhà Lý - cội nguồn vương triều hưng thịnh</p>
-    <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=1200" style="width:60vw;border-radius:16px;margin-top:20px;box-shadow:0 20px 40px rgba(0,0,0,.2)">
-  </div>
-</section>
-
-<section class="danhlam" style="background:#ffe9b0" id="dl2">
-  <div class="curtain"><span></span><span></span></div>
-  <div style="z-index:3">
-    <h1 style="font-size:6vw">CHÙA DÂU - CHÙA PHẬT TÍCH</h1>
-    <p class="sub">Trung tâm Phật giáo cổ nhất Việt Nam - Tượng Phật nghìn năm</p>
-  </div>
-</section>
-
-<!-- 5 ẨM THỰC -->
-<section id="amthuc">
-  <div style="width:100%;z-index:4">
-    <div class="label">ẨM THỰC</div>
-    <div class="title-big">Hương vị Bắc Ninh</div>
-    <div class="food-track" style="margin-top:30px">
-      <div style="flex:1">
-        <div class="label" id="foodIndex">MÓN 1 / 4</div>
-        <h2 id="foodName" style="font-size:2.6vw;color:var(--gold)">BÁNH PHU THÊ ĐÌNH BẢNG</h2>
-        <p id="foodDesc" style="margin-top:10px;opacity:.85;line-height:1.6">Bánh dẻo thơm nhân đậu xanh, dừa nạo, gói trong lá dong, biểu tượng cho tình nghĩa phu thê chung thủy của người Kinh Bắc.</p>
-        <div class="dots">
-          <span class="active" onclick="doiMon(0)"></span>
-          <span onclick="doiMon(1)"></span>
-          <span onclick="doiMon(2)"></span>
-          <span onclick="doiMon(3)"></span>
-        </div>
-      </div>
-      <img id="foodImg" class="food-img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800">
-    </div>
-  </div>
-</section>
-
-<!-- 6 LỄ HỘI -->
-<section id="lehoi">
-  <div class="lehoi-bg" id="lehoiBg" style="background-image:url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1600')"></div>
-  <div class="curtain" id="cLeHoi"><span></span><span></span></div>
-  <div class="lehoi-card">
-    <div class="label">LỄ HỘI TRUYỀN THỐNG</div>
-    <div class="lehoi-title" id="lehoiTitle">LỄ HỘI ĐỀN ĐÔ & HỘI LIM</div>
-    <p style="margin-top:14px">Cả Kinh Bắc rực sáng trong sắc đỏ, tiếng trống hội và làn điệu Quan Họ</p>
-    <div class="mua-btns" style="justify-content:center;margin-top:16px">
-      <button class="active" onclick="doiLeHoi(0)">LỄ HỘI ĐỀN ĐÔ</button>
-      <button onclick="doiLeHoi(1)">HỘI LIM QUAN HỌ</button>
-    </div>
-    <p id="lehoiDesc" style="margin-top:12px;color:var(--gold)">Rước kiệu, tế lễ uy nghiêm - tưởng nhớ công đức các vua Lý</p>
-  </div>
-</section>
-
-<!-- 7 KẾT LUẬN -->
-<section id="ketluan">
-  <div class="pattern"></div>
-  <div class="curtain"><span></span><span></span></div>
-  <div style="display:flex;gap:5vw;z-index:3;align-items:center;width:100%">
-    <img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=600" style="width:28vw;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.3)">
-    <div>
-      <div class="label" style="color:#8c1515">KẾT LUẬN</div>
-      <h2 style="font-size:2.2vw;line-height:1.2">Bắc Ninh không chỉ là trung tâm công nghiệp mà còn là biểu tượng văn hóa Quan Họ và Phật giáo ngàn năm</h2>
-      <p style="margin-top:14px;opacity:.8;line-height:1.6">Sự hòa quyện giữa truyền thống và hiện đại khiến Bắc Ninh trở thành một trong những tỉnh đáng sống và đáng khám phá nhất miền Bắc. Nơi tiếng trống hội Lim vẫn vang, nơi bánh phu thê vẫn dẻo thơm, nơi cội nguồn nhà Lý vẫn linh thiêng.</p>
-      <p style="margin-top:16px;font-style:italic;color:#8c1515;font-weight:700">Hãy một lần đến Bắc Ninh để cảm nhận vẻ đẹp của lịch sử và nhịp sống hiện đại!</p>
-      <div style="margin-top:18px;display:flex;gap:8px"><span class="glass" style="color:#000">Quan Họ</span><span class="glass" style="color:#000">Đền Đô</span><span class="glass" style="color:#000">Chùa Dâu</span></div>
-    </div>
-  </div>
-  <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:3;letter-spacing:6px;color:#8c1515">HẸN GẶP LẠI Ở BẮC NINH - XỨ KINH BẮC</div>
-</section>
+<section id="s1" style="background:#1a0a0a"><div class="curtain"><span></span><span></span></div><div style="z-index:4"><div class="label">LỊCH SỬ</div><div class="title-big"><span>Lịch sử phát triển</span></div></div></section>
+<section id="s2" style="background:#000"><div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1600') center/cover;opacity:.6"></div><div style="z-index:4"><div class="title-big"><span>Bốn mùa Bắc Ninh</span></div></div></section>
+<section id="s3" style="background:#fdf3d0;color:#000;justify-content:center;text-align:center"><div class="curtain"><span></span><span></span></div><div style="z-index:4"><div class="label" style="color:#8c1515">DANH LAM</div><h1 style="font-family:'Lora';font-size:7vw;color:#8c1515">ĐỀN ĐÔ - CHÙA DÂU</h1></div></section>
+<section id="s4" style="background:#120202"><div style="z-index:4"><div class="title-big"><span>Ẩm thực Bắc Ninh</span></div></div></section>
+<section id="s5" style="background:#fff7d0;color:#2a1400;justify-content:center;text-align:center"><div style="z-index:4"><h2 style="font-size:2.5vw">Hẹn gặp lại ở Bắc Ninh!</h2></div></section>
 
 <script>
-// curtain open on scroll
-const obs=new IntersectionObserver(es=>{
- es.forEach(e=>{
-  if(e.isIntersecting){e.target.querySelectorAll('.curtain').forEach(c=>c.classList.add('open'))}
- })
-},{threshold:0.35});
-document.querySelectorAll('section').forEach(s=>obs.observe(s));
-
-// 4 MÙA DATA BẮC NINH
-const muaData=[
- {ten:'MÙA XUÂN',mo:'Hội Lim rộn rã - Liền anh liền chị trẩy hội',bg:'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1600'},
- {ten:'MÙA HÈ',mo:'Nắng vàng trên đồng lúa Yên Phong - mùa gặt rộn ràng',bg:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1600'},
- {ten:'MÙA THU',mo:'Lá vàng Đền Đô, cốm làng Diềm thơm ngát',bg:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600'},
- {ten:'MÙA ĐÔNG',mo:'Sương mờ Chùa Dâu - ấm áp bên bếp bánh phu thê',bg:'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=1600'}
-];
-function doiMua(i){
- document.querySelectorAll('#bonmua .mua-btns button').forEach((b,k)=>b.classList.toggle('active',k===i));
- document.getElementById('tenMua').innerText=muaData[i].ten;
- document.getElementById('moTaMua').innerText=muaData[i].mo;
- document.getElementById('bonmuaBg').style.backgroundImage=`url('${muaData[i].bg}')`;
+let current=0;
+const sections=document.querySelectorAll('section');
+function animateText(n){
+  const sec=sections[n];
+  sec.querySelectorAll('.label').forEach(el=>{el.classList.remove('show'); setTimeout(()=>el.classList.add('show'),100)});
+  sec.querySelectorAll('.title-big').forEach(el=>{el.classList.remove('show'); setTimeout(()=>el.classList.add('show'),300)});
+  const glasses=sec.querySelectorAll('.glass');
+  glasses.forEach((g,i)=>{g.classList.remove('show'); setTimeout(()=>g.classList.add('show'),600+i*200)});
+  const stat=document.getElementById('stat');
+  if(stat){stat.style.transition='1s 1.2s'; stat.style.opacity='0'; setTimeout(()=>stat.style.opacity='1',1200)}
+  document.querySelectorAll('.curtain').forEach(c=>c.classList.remove('open'));
+  sec.querySelector('.curtain')?.classList.add('open');
 }
-
-// ẨM THỰC BẮC NINH
-const foodData=[
- {ten:'BÁNH PHU THÊ ĐÌNH BẢNG',mo:'Bánh dẻo thơm nhân đậu xanh, dừa nạo, gói trong lá dong, biểu tượng cho tình nghĩa phu thê chung thủy của người Kinh Bắc.',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800'},
- {ten:'NEM BÙI NINH XÁ',mo:'Nem thính thơm bùi, cuốn lá sung, chấm tương ớt. Đặc sản nức tiếng làng Bùi Xá, Thuận Thành.',img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800'},
- {ten:'BÁNH KHÚC LÀNG DIỀM',mo:'Bánh khúc xanh mướt mùi lá khúc, nhân đậu xanh mỡ hành, món quà quê dân dã nhưng đậm hồn Quan Họ.',img:'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=800'},
- {ten:'RƯỢU LÀNG VÂN & BÁNH TẺ',mo:'Rượu làng Vân nồng nàn men nếp cái hoa vàng, uống cùng bánh tẻ Chờ dẻo thơm - trọn vị Bắc Ninh.',img:'https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=800'}
-];
-function doiMon(i){
- document.getElementById('foodIndex').innerText=`MÓN ${i+1} / 4`;
- document.getElementById('foodName').innerText=foodData[i].ten;
- document.getElementById('foodDesc').innerText=foodData[i].mo;
- document.getElementById('foodImg').src=foodData[i].img;
- document.querySelectorAll('.dots span').forEach((d,k)=>d.classList.toggle('active',k===i));
+function goTo(i){
+  if(i<0) i=0; if(i>=sections.length) i=sections.length-1;
+  current=i;
+  sections[i].scrollIntoView({behavior:'smooth'});
+  document.getElementById('pageNum').innerText=`${current+1} / ${sections.length}`;
+  document.getElementById('progress').style.width=`${(current+1)/sections.length*100}%`;
+  setTimeout(()=>animateText(i),400);
 }
-
-// LỄ HỘI
-const lehoiData=[
- {title:'LỄ HỘI ĐỀN ĐÔ & HỘI LIM',desc:'Rước kiệu, tế lễ uy nghiêm - tưởng nhớ công đức các vua Lý',bg:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1600'},
- {title:'TẾT NGUYÊN ĐÁN & THẢ ĐÈN HOA ĐĂNG',desc:'Đoàn viên, cầu chúc một năm an lành bên bờ sông Cầu',bg:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600'}
-];
-function doiLeHoi(i){
- document.getElementById('lehoiTitle').innerText=lehoiData[i].title;
- document.getElementById('lehoiDesc').innerText=lehoiData[i].desc;
- document.getElementById('lehoiBg').style.backgroundImage=`url('${lehoiData[i].bg}')`;
- document.querySelectorAll('#lehoi .mua-btns button').forEach((b,k)=>b.classList.toggle('active',k===i));
-}
-setTimeout(()=>{document.getElementById('c1').classList.add('open')},300);
+function nextSection(){goTo(current+1)}
+function prevSection(){goTo(current-1)}
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') nextSection();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') prevSection();
+});
+// chặn cuộn
+window.addEventListener('wheel',e=>e.preventDefault(),{passive:false});
+// chạy lần đầu
+setTimeout(()=>{document.getElementById('c0').classList.add('open'); animateText(0)},500);
+goTo(0);
 </script>
 </body>
 </html>
