@@ -6,105 +6,68 @@
 <title>BẮC NINH - Xứ Kinh Bắc</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;700;900&family=Lora:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#f7d88a;--red:#8c1515}
+:root{--gold:#f7d88a}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#0f0404;color:#fff;font-family:'Be Vietnam Pro',sans-serif;overflow-x:hidden}
-section{position:relative;min-height:100vh;width:100%;padding:6vw 5vw;display:flex;align-items:center;overflow:hidden}
-.title-big{font-family:'Lora',serif;font-size:5vw;color:var(--gold);line-height:.9;text-transform:uppercase;overflow:hidden;text-shadow:0 2px 20px rgba(0,0,0,0.5)}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{background:#0f0404;color:#fff;font-family:'Be Vietnam Pro',sans-serif;position:fixed;inset:0;width:100%}
+section{position:absolute;inset:0;width:100%;height:100%;padding:6vw 5vw;display:flex;align-items:center;overflow:hidden;opacity:0;pointer-events:none;transform:translateX(40px);transition:all .8s cubic-bezier(.77,0,.175,1)}
+section.active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:2}
+.title-big{font-family:'Lora',serif;font-size:5vw;color:var(--gold);line-height:.9;text-transform:uppercase;overflow:hidden}
 .title-big span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.77,0,.175,1)}
-.title-big.show span{transform:translateY(0)}
+.active .title-big span{transform:translateY(0)}
 .label{letter-spacing:5px;font-size:11px;color:var(--gold);opacity:0;transform:translateY(20px);transition:.8s .2s}
-.label.show{opacity:1;transform:translateY(0)}
-/* LIQUID GLASS NÉT */
+.active .label{opacity:1;transform:translateY(0)}
 .glass{
   position:relative;
   background:linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.08) 100%);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid rgba(255,255,255,0.28);
-  border-top:1px solid rgba(255,255,255,0.5);
-  border-radius:20px;
-  padding:14px 18px;
-  font-size:13.5px;
-  color:rgba(255,255,255,0.95);
+  backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.28);border-top:1px solid rgba(255,255,255,0.5);
+  border-radius:20px;padding:14px 18px;font-size:13.5px;color:rgba(255,255,255,0.95);
   box-shadow:0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.4);
-  opacity:0;transform:translateX(60px);
-  transition:all .9s cubic-bezier(.16,1,.3,1);
-  margin-top:12px;
+  opacity:0;transform:translateX(60px);transition:all .9s cubic-bezier(.16,1,.3,1);margin-top:12px;
 }
-.glass::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent)}
-.glass.show{opacity:1;transform:translateX(0)}
+.active .glass{opacity:1;transform:translateX(0)}
 .curtain{position:absolute;inset:0;display:flex;z-index:5;pointer-events:none}
 .curtain span{flex:1;background:repeating-linear-gradient(90deg,#b51a1a 0 35px,#9e1616 35px 70px);transition:transform 1.2s cubic-bezier(.85,0,.15,1)}
 .curtain.open span:first-child{transform:translateX(-102%)}
 .curtain.open span:last-child{transform:translateX(102%)}
-.nav-float{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:12px;align-items:center;background:rgba(0,0,0,0.7);border:1px solid rgba(247,216,138,0.3);backdrop-filter:blur(12px);padding:8px 14px;border-radius:40px}
-.nav-float button{padding:10px 20px;border-radius:20px;border:none;cursor:pointer;font-weight:900;font-size:13px}
+.nav-float{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:12px;align-items:center;background:rgba(0,0,0,0.75);border:1px solid rgba(247,216,138,0.3);backdrop-filter:blur(12px);padding:8px 14px;border-radius:40px}
+.nav-float button{padding:11px 22px;border-radius:20px;border:none;cursor:pointer;font-weight:900;font-size:13px;transition:.2s}
+.nav-float button:active{transform:scale(0.96)}
 .btn-next{background:var(--gold);color:#000}
 .btn-prev{background:rgba(255,255,255,0.18);color:#fff}
+.btn-prev:disabled,.btn-next:disabled{opacity:0.3;pointer-events:none}
 .progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:101;transition:width .4s}
-/* ẢNH NÉT CĂNG */
-.bonmua-img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:center;
-  filter:brightness(.92) contrast(1.08) saturate(1.1);
-  transition:opacity .6s, transform 1.2s;
-  image-rendering:-webkit-optimize-contrast;
-}
+.bonmua-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.92) contrast(1.08) saturate(1.1)}
 .mua-btns{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
 .mua-btns button{padding:9px 18px;border-radius:22px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);color:#fff;font-size:12px;cursor:pointer;transition:.3s}
 .mua-btns button.active{background:var(--gold);color:#000;font-weight:800}
-.overlay-dark{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);z-index:1;pointer-events:none}
+.overlay-dark{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.55));z-index:1;pointer-events:none}
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
 <div class="nav-float">
-  <button class="btn-prev" onclick="prevSection()">← Quay lại</button>
+  <button class="btn-prev" id="btnPrev" onclick="prevSection()">← Quay lại</button>
   <span id="pageNum" style="font-size:12px;color:var(--gold);min-width:60px;text-align:center">1 / 7</span>
-  <button class="btn-next" onclick="nextSection()">Tiếp theo →</button>
+  <button class="btn-next" id="btnNext" onclick="nextSection()">Tiếp theo →</button>
 </div>
 
-<section id="s0" style="background:radial-gradient(60% 80% at 70% 40%,#3a1810 0%,#0f0404 70%)">
-  <div class="curtain" id="c0"><span></span><span></span></div>
+<section id="s0" class="active" style="background:radial-gradient(60% 80% at 70% 40%,#3a1810 0%,#0f0404 70%)">
+  <div class="curtain open" id="c0"><span></span><span></span></div>
   <div style="max-width:560px;z-index:10">
     <div class="label">TỔNG QUAN VỀ</div>
     <div class="title-big"><span>BẮC NINH</span></div>
-    <div class="glass">📜 Bắc Ninh - Xứ Kinh Bắc địa linh nhân kiệt</div>
-    <div class="glass">👑 Thủ phủ Luy Lâu năm 187, trung tâm Phật giáo đầu tiên Việt Nam</div>
-    <div class="glass">🎭 Trung tâm Quan Họ, làng nghề Đông Hồ, Phù Lãng, Đền Đô</div>
+    <div class="glass" style="transition-delay:.2s">📜 Bắc Ninh - Xứ Kinh Bắc địa linh nhân kiệt</div>
+    <div class="glass" style="transition-delay:.4s">👑 Thủ phủ Luy Lâu năm 187, trung tâm Phật giáo đầu tiên Việt Nam</div>
+    <div class="glass" style="transition-delay:.6s">🎭 Trung tâm Quan Họ, làng nghề Đông Hồ, Phù Lãng, Đền Đô</div>
   </div>
   <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=800" style="position:absolute;right:2%;bottom:0;width:38vw;border-radius:20px;opacity:.9;z-index:2">
 </section>
 
-<section id="s1" style="background:#1a0a0a"><div class="curtain"><span></span><span></span></div><div style="z-index:10;width:100%"><div class="label">LỊCH SỬ</div><div class="title-big"><span>Lịch sử phát triển</span></div><div class="glass" style="max-width:600px">Luy Lâu - Đền Đô - Làng nghề Quan Họ - Ngày nay là trung tâm công nghiệp Samsung</div></div></section>
+<section id="s1" style="background:#1a0a0a"><div class="curtain"><span></span><span></span></div><div style="z-index:10;width:100%"><div class="label">LỊCH SỬ</div><div class="title-big"><span>Lịch sử phát triển</span></div><div class="glass">Luy Lâu - Đền Đô - Làng nghề Quan Họ - Ngày nay là trung tâm công nghiệp Samsung</div></div></section>
 
-<!-- 4 MÙA NÉT CĂNG - DÙNG ẢNH CỦA ÔNG -->
-<section id="s2">
-  <img id="bonmuaBg" class="bonmua-img" src="muaxuan.jpg" alt="Bac Ninh bon mua">
-  <div class="overlay-dark"></div>
-  <div class="curtain"><span></span><span></span></div>
-  <div style="z-index:10;display:flex;justify-content:space-between;width:100%">
-    <div style="max-width:420px">
-      <div class="label">ĐỊA LÝ & KHÍ HẬU</div>
-      <div class="title-big"><span>Bắc Ninh<br>bốn mùa</span></div>
-      <div class="glass">📍 Cửa ngõ Bắc Hà Nội, Đồng bằng sông Hồng</div>
-      <div class="mua-btns">
-        <button class="active" onclick="doiMua(0)">Mùa xuân</button>
-        <button onclick="doiMua(1)">Mùa hạ</button>
-        <button onclick="doiMua(2)">Mùa thu</button>
-        <button onclick="doiMua(3)">Mùa đông</button>
-      </div>
-    </div>
-    <div style="text-align:right">
-      <div id="tenMua" class="title-big" style="font-size:5vw"><span>MÙA XUÂN</span></div>
-      <div id="moTaMua" style="color:var(--gold);text-shadow:0 2px 10px rgba(0,0,0,0.8)">Hội Lim rộn rã - Liền anh liền chị trẩy hội</div>
-    </div>
-  </div>
-</section>
+<section id="s2"><img id="bonmuaBg" class="bonmua-img" src="muaxuan.jpg"><div class="overlay-dark"></div><div class="curtain"><span></span><span></span></div><div style="z-index:10;display:flex;justify-content:space-between;width:100%"><div style="max-width:420px"><div class="label">ĐỊA LÝ & KHÍ HẬU</div><div class="title-big"><span>Bắc Ninh<br>bốn mùa</span></div><div class="glass">📍 Cửa ngõ Bắc Hà Nội, Đồng bằng sông Hồng</div><div class="mua-btns"><button class="active" onclick="doiMua(0)">Mùa xuân</button><button onclick="doiMua(1)">Mùa hạ</button><button onclick="doiMua(2)">Mùa thu</button><button onclick="doiMua(3)">Mùa đông</button></div></div><div style="text-align:right"><div id="tenMua" class="title-big" style="font-size:5vw"><span>MÙA XUÂN</span></div><div id="moTaMua" style="color:var(--gold)">Hội Lim rộn rã - Liền anh liền chị trẩy hội</div></div></div></section>
 
 <section id="s3" style="background:#fdf3d0;color:#000;justify-content:center;text-align:center"><div class="curtain"><span></span><span></span></div><div style="z-index:10"><div class="label" style="color:#8c1515">DANH LAM</div><h1 style="font-family:'Lora';font-size:7vw;color:#8c1515">ĐỀN ĐÔ - CHÙA DÂU</h1></div></section>
 <section id="s4" style="background:#120202"><div class="curtain"><span></span><span></span></div><div style="z-index:10;width:100%"><div class="label">ẨM THỰC</div><div class="title-big"><span>Bánh Phu Thê - Nem Bùi</span></div><div class="glass">Đặc sản Kinh Bắc đậm đà hồn quê</div></div></section>
@@ -114,24 +77,28 @@ section{position:relative;min-height:100vh;width:100%;padding:6vw 5vw;display:fl
 <script>
 let current=0;
 const sections=document.querySelectorAll('section');
-function animateText(n){
-  const sec=sections[n];
-  sec.querySelectorAll('.label').forEach(el=>{el.classList.remove('show'); void el.offsetWidth; el.classList.add('show')});
-  sec.querySelectorAll('.title-big').forEach(el=>{el.classList.remove('show'); void el.offsetWidth; el.classList.add('show')});
-  sec.querySelectorAll('.glass').forEach((g,i)=>{g.classList.remove('show'); setTimeout(()=>g.classList.add('show'),600+i*200)});
-  document.querySelectorAll('.curtain').forEach(c=>c.classList.remove('open'));
-  setTimeout(()=>sec.querySelector('.curtain')?.classList.add('open'),200);
-}
-function goTo(i){
-  if(i<0) i=0; if(i>=sections.length) i=sections.length-1;
-  current=i;
-  sections[i].scrollIntoView({behavior:'smooth'});
+function updateUI(){
+  sections.forEach((s,i)=>s.classList.toggle('active',i===current));
   document.getElementById('pageNum').innerText=`${current+1} / ${sections.length}`;
   document.getElementById('progress').style.width=`${(current+1)/sections.length*100}%`;
-  animateText(i);
+  document.getElementById('btnPrev').disabled = current===0;
+  document.getElementById('btnNext').disabled = current===sections.length-1;
+  // rèm
+  document.querySelectorAll('.curtain').forEach(c=>c.classList.remove('open'));
+  setTimeout(()=>sections[current].querySelector('.curtain')?.classList.add('open'),100);
+  // animation glass
+  sections[current].querySelectorAll('.glass').forEach((g,i)=>{
+    g.style.transitionDelay = `${0.2 + i*0.15}s`;
+  });
+}
+function goTo(i){
+  if(i<0 || i>=sections.length) return;
+  current=i;
+  updateUI();
 }
 function nextSection(){goTo(current+1)}
 function prevSection(){goTo(current-1)}
+
 const muaData=[
  {ten:'MÙA XUÂN',mo:'Hội Lim rộn rã - Liền anh liền chị trẩy hội',bg:'muaxuan.jpg'},
  {ten:'MÙA HẠ',mo:'Nắng vàng đồng lúa Yên Phong - mùa gặt rộn ràng',bg:'muaha.jpg'},
@@ -142,21 +109,22 @@ function doiMua(i){
  document.querySelectorAll('#s2 .mua-btns button').forEach((b,k)=>b.classList.toggle('active',k===i));
  const img=document.getElementById('bonmuaBg');
  img.style.opacity='0';
- setTimeout(()=>{
-   img.src=muaData[i].bg;
-   img.style.opacity='1';
- },300);
- const ten=document.getElementById('tenMua');
- ten.classList.remove('show');
- setTimeout(()=>{ten.innerHTML=`<span>${muaData[i].ten}</span>`; void ten.offsetWidth; ten.classList.add('show')},150);
+ setTimeout(()=>{img.src=muaData[i].bg; img.style.opacity='1'},300);
+ document.getElementById('tenMua').innerHTML=`<span>${muaData[i].ten}</span>`;
  document.getElementById('moTaMua').innerText=muaData[i].mo;
 }
-window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') nextSection();
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') prevSection();
+
+// KHÓA HẾT KÉO / LĂN / VUỐT
+document.addEventListener('wheel', e=>e.preventDefault(), {passive:false});
+document.addEventListener('touchmove', e=>e.preventDefault(), {passive:false});
+document.addEventListener('keydown', e=>{
+  const blockKeys = ['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '];
+  if(blockKeys.includes(e.key)) e.preventDefault();
+  if(e.key==='ArrowRight') nextSection();
+  if(e.key==='ArrowLeft') prevSection();
 });
-setTimeout(()=>animateText(0),500);
-goTo(0);
+
+updateUI();
 </script>
 </body>
 </html>
